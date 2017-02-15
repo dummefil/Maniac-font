@@ -1,2 +1,1 @@
-# dummefil.github.io
-Maniac font
+# dummefil.github.io/Maniac-font
