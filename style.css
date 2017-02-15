@@ -1,7 +1,14 @@
 @import url('https://fonts.googleapis.com/css?family=Barrio');
 
-body{
+#content{
 	font-family: 'Barrio';
+}
+
+span{
+	margin-top: 40px;
+}
+
+body{
 	margin: 0 auto;
 	width: 70%;
 }

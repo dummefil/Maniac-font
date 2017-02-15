@@ -4,12 +4,24 @@
 	<meta charset="UTF-8">
 	<title>Colors</title>
 	<link rel="stylesheet" href="style.css" type="text/css">
+	<script src="javascript.js" defer></script>
 </head>
 <body>
 	<h1>Maniac font</h1>
-	<textarea id="text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi modi, maxime recusandae sunt sit nihil consequuntur quaerat vero quibusdam illum distinctio enim magni quae molestiae nam fuga odio dolore, deserunt!</textarea>
+	<textarea id="text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis nisi tenetur recusandae, eum aliquid magni libero maiores quos. Id aperiam placeat possimus consequuntur atque facilis? Tenetur, magnam architecto. Vero, non.</textarea>
 	<button id="generate">Generate</button>
 	<div id="content"></div>
+	<div id="settings">
+		<h2>Settings</h2>
+		<span>Color:</span>
+		<input type="radio" name="color" value="RGB" checked>RGB
+		<input type="radio" name="color" value="GREY">GREY
+		<br>
+		<span>Font-size:</span>
+		<span>from</span>
+		<input type="text" id="fontSizeMin" placeholder="20">
+		<span>to</span>
+		<input type="text" id="fontSizeMax" placeholder="40">
+  	</div>
 </body>
-<script src="javascript.js"></script>
 </html>
