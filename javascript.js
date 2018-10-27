@@ -33,7 +33,7 @@ function init(fMin, fMax, color = "RGB"){
 
   if (roar.checked) {
     forEachInTextarea((unit) => {
-      const p = Math.random() > 0.5 ? 'р' : 'Р';
+      const p = Math.random() > 0.5 ? 'p' : 'P';
       const textNode = document.createTextNode(p);
       const pNode = document.createElement('p');
 
