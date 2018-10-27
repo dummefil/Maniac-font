@@ -1,7 +1,16 @@
 @import url('https://fonts.googleapis.com/css?family=Barrio');
 
+* {
+    box-sizing: border-box;
+    outline:none
+}
+*:focus {
+    outline:none
+}
+
 #content{
 	font-family: 'Barrio';
+    word-wrap: break-word;
 }
 
 span{
@@ -12,14 +21,16 @@ body{
 	margin: 0 auto;
 	width: 70%;
 }
-h1{
-	text-align: center;
-	text-transform: uppercase;
+
+h1 {
+	text-align: left;
 }
+
 textarea{
  	position: relative;
 	width: 100%;
 }
+
 p{
 	display: inline;
 }
