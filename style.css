@@ -31,6 +31,14 @@ button{
 	margin-bottom: 40px;
 	margin-top: 40px;
 }
+
+#text {
+    min-height: 300px;
+    min-width: 100%;
+    max-width: 100%;
+    padding: 15px;
+}
+
 #input-block{
 	float: left;
 	width: 100%;
@@ -45,6 +53,22 @@ input[type="text"]{
 	width: 30px;
 }
 
+label + input {
+    margin-right: 10px;
+}
+
+#generate {
+    color: white;
+    border: none;
+    background: #9a5cb4;
+    border-bottom: solid 6px #81439B;
+    transition: all 100ms linear;
+}
+
+#generate:active {
+    transition: all;
+    border-bottom: none;
+}
 
 
 

@@ -7,23 +7,27 @@
 	<script src="javascript.js" defer></script>
 </head>
 <body>
-	<h1>Maniac font</h1>
-	<textarea id="text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis nisi tenetur recusandae, eum aliquid magni libero maiores quos. Id aperiam placeat possimus consequuntur atque facilis? Tenetur, magnam architecto. Vero, non.</textarea>
-	<div id="input-block">
-		<button id="generate">Generate</button>
-			<div id="settings">
-				<h2>Settings</h2>
-				<span>Color:</span>
-				<input type="radio" name="color" value="RGB" checked>RGB
-				<input type="radio" name="color" value="GREY">GREY
-				<br>
-				<span>Font-size:</span>
-				<span>from</span>
-				<input type="text" id="fontSizeMin" placeholder="20">
-				<span>to</span>
-				<input type="text" id="fontSizeMax" placeholder="40">
-			</div>
-  	</div>
-	<div id="content"></div>
+<h1>Maniac font</h1>
+<textarea id="text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis nisi tenetur recusandae, eum aliquid magni libero maiores quos. Id aperiam placeat possimus consequuntur atque facilis? Tenetur, magnam architecto. Vero, non.</textarea>
+<div id="input-block">
+    <button id="generate">Generate Text</button>
+    <div id="settings">
+        <h2>Settings</h2>
+        <span>Color:</span>
+        <label for="RGB">RGB</label>
+        <input type="radio" name="color" id="RGB" value="RGB" checked>
+        <label for="GREY">GREY</label>
+        <input type="radio" name="color" id="GREY" value="GREY">
+        <br>
+        <span>Font-size:</span>
+        <label for="fontSizeMin">from</label>
+        <input type="text" id="fontSizeMin" placeholder="20">
+        <label for="fontSizeMax">to</label>
+        <input type="text" id="fontSizeMax" placeholder="40">
+        <label for="roar">Secret</label>
+        <input type="checkbox" id="roar">
+    </div>
+</div>
+<div id="content"></div>
 </body>
 </html>
