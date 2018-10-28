@@ -1,4 +1,4 @@
-# dummefil.github.io/Maniac-font
+# dummefil.github.io/maniac-font
 ## RGB example
 ![Example](./example1.png)
 ## GREY example
