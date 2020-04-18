@@ -7,6 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Maniac font</title>
   <link rel="stylesheet" href="style.css" type="text/css">
+  <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 </head>
 <body>
 <div class="container">
@@ -41,7 +42,10 @@
       </div>
     </div>
   </div>
-  <button id="generate-button" class="generate-button">Generate Text</button>
+  <div class="buttons-wrapper">
+    <button id="generate-button" class="custom-button generate-button">Generate</button>
+    <button id="save-button" class="custom-button save-button">Save Image</button>
+  </div>
 </div>
 <div id="content"></div>
 </body>
