@@ -1,0 +1,17 @@
+{
+  "name": "maniac-font",
+  "version": "1.0.0",
+  "description": "Text generator with Barrio font",
+  "main": "javascript.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "browser-sync start --server --files ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dummefil/maniac-font.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
