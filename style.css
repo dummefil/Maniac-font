@@ -1,4 +1,15 @@
-@import url('https://fonts.googleapis.com/css?family=Barrio');
+@font-face {
+  font-family: 'Barrio';
+  src: url('./fonts/Barrio-Regular.eot');
+  src: local('Barrio'), local('Barrio-Regular'),
+  url('./fonts/Barrio-Regular.eot?#iefix') format('embedded-opentype'),
+  url('./fonts/Barrio-Regular.woff2') format('woff2'),
+  url('./fonts/Barrio-Regular.woff') format('woff'),
+  url('./fonts/Barrio-Regular.ttf') format('truetype'),
+  url('./fonts/Barrio-Regular.svg#Barrio-Regular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
 
 :root {
   --main-color: #ff5a18;
