@@ -1,16 +1,20 @@
 document.addEventListener('DOMContentLoaded', () => {
 
   const text = getNodes('#text')[0];
-  const generate = getNodes('#generate-button')[0];
+  const generateButton = getNodes('#generate-button')[0];
   const content = getNodes('#content')[0];
+  const saveButton = getNodes('#save-button')[0];
   const colors = { 'red': '', 'green': '', 'blue': '' };
 
   function getNodes(tag) {
     return document.querySelectorAll(tag);
   }
-  customRadioBtn();
+
+  initCustomRadioButtons();
   generateText();
-  generate.onclick = generateText;
+
+  generateButton.onclick = generateText;
+  saveButton.onclick = savePng;
   window.addEventListener('keydown', (event) => {
     if (event.key === 'Enter') {
       generateText();
@@ -78,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
     content.textContent = '';
   }
 
-  function customRadioBtn() {
+  function initCustomRadioButtons() {
     const groups = getNodes('.custom-radio-group');
 
     groups.forEach(group => {
@@ -104,5 +108,33 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
     }
+  }
+
+  function getUniqName() {
+    const date = new Date();
+    const string = date.getDate() + "-"
+      + (date.getMonth()+1)  + "-"
+      + date.getFullYear() + "_"
+      + date.getHours() + ":"
+      + date.getMinutes() + ":"
+      + date.getSeconds();
+    return 'maniac-font_' + string;
+  }
+
+  function savePng() {
+    const doc = document.querySelector("#content");
+    console.log(123);
+    html2canvas(doc, { backgroundColor: null })
+      .then(canvas => {
+        const image = canvas.toDataURL("image/png")
+          .replace("image/png", "image/octet-stream");
+        console.log(image);
+        const a = document.createElement('a');
+        a.href = image;
+        const fileName = getUniqName();
+        console.log(fileName);
+        a.download = fileName + '.png';
+        a.click();
+      });
   }
 })
