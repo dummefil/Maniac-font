@@ -121,22 +121,39 @@ body {
   padding-left: 0;
 }
 
-.generate-button {
+.buttons-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  width: 100%;
+}
+
+.custom-button {
   color: white;
   border: none;
   background: var(--main-color);
   transition: all 100ms linear;
   font-size: 2em;
-  width: 100%;
+  flex-grow: 1;
   padding: 17px 0;
 }
 
-.generate-button:hover {
+.custom-button + .custom-button {
+  margin-left: 5px;
+}
+
+.custom-button:hover {
   cursor: pointer;
   background: var(--main-color-dark);
 }
 
-.generate-button:focus { outline:0; }
+.generate-button {
+  flex-grow: 3;
+}
+
+.custom-button:focus { outline:0; }
 
 .custom-radio {
   height: 40px;
