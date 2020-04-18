@@ -1,33 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Maniac font</title>
-    <link rel="stylesheet" href="style.css" type="text/css">
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Maniac font</title>
+  <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body>
-<h1>Maniac font</h1>
-<textarea id="text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis nisi tenetur recusandae, eum aliquid magni libero maiores quos. Id aperiam placeat possimus consequuntur atque facilis? Tenetur, magnam architecto. Vero, non.</textarea>
-<div id="input-block">
-    <button id="generate">Generate Text</button>
-    <div id="settings">
-        <h2>Settings</h2>
-        <span>Color:</span>
-        <label for="RGB">RGB</label>
-        <input type="radio" name="color" id="RGB" value="RGB" checked>
-        <label for="GREY">GREY</label>
-        <input type="radio" name="color" id="GREY" value="GREY">
-        <br>
-        <span>Font-size:</span>
-        <label for="fontSizeMin">from</label>
-        <input type="text" id="fontSizeMin" placeholder="20">
-        <label for="fontSizeMax">to</label>
-        <input type="text" id="fontSizeMax" placeholder="40">
-        <label for="roar">Secret</label>
-        <input type="checkbox" id="roar">
+<div class="container">
+  <textarea class="text-area" id="text">Lorem ipsum dolor sit amet</textarea>
+  <div id="settings" class="settings-block">
+    <div class="input-group custom-radio-group">
+      <span class="input-group-label">Color:</span>
+      <div class="input-wrapper-column">
+        <label for="RGB" class="input-label">RGB</label>
+        <div class="custom-radio custom-radio-active"
+             id="RGB"
+             value="RGB"
+             name="color"
+             checked></div>
+      </div>
+      <div class="input-wrapper-column">
+        <label for="RGB" class="input-label">GREY</label>
+        <div class="custom-radio" id="GREY" value="GREY" name="color"></div>
+      </div>
     </div>
+    <div class="input-group">
+      <span class="input-group-label">Font-size:</span>
+      <div class="input-wrappers">
+        <div class="input-wrapper">
+          <label class="input-label" for="fontSizeMin">From:</label>
+          <input class="font-input" type="number" id="fontSizeMin" placeholder="20">
+        </div>
+        <div class="input-wrapper">
+          <label class="input-label" for="fontSizeMax">To:</label>
+          <input class="font-input" type="number" id="fontSizeMax" placeholder="40">
+        </div>
+      </div>
+    </div>
+  </div>
+  <button id="generate-button" class="generate-button">Generate Text</button>
 </div>
 <div id="content"></div>
 </body>
-<script src="javascript.js"></script>
+<script src="script.js"></script>
 </html>
