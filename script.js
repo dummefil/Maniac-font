@@ -102,7 +102,6 @@ document.addEventListener('DOMContentLoaded', () => {
           classList.add(className);
           event.target.setAttribute('checked', 'checked');
         }
-        console.log('Clicked', checked, event.target);
       }
     }
   }
