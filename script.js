@@ -1,13 +1,21 @@
 document.addEventListener('DOMContentLoaded', () => {
+  //todo word wrapping, not only letter
+  //todo fix bug where font is not load at start
 
-  const text = getNodes('#text')[0];
-  const generateButton = getNodes('#generate-button')[0];
-  const content = getNodes('#content')[0];
-  const saveButton = getNodes('#save-button')[0];
-  const colors = { 'red': '', 'green': '', 'blue': '' };
+  const text = getNode('#text');
+  const generateButton = getNode('#generate-button');
+  const canvasNode = getNode('canvas');
+  const saveButton = getNode('#save-button');
+  const canvasContext = canvasNode.getContext('2d');
+  const canvasWidth = canvasNode.width;
+  const canvasHeight = canvasNode.height;
 
   function getNodes(tag) {
     return document.querySelectorAll(tag);
+  }
+
+  function getNode(tag) {
+    return document.querySelector(tag);
   }
 
   initCustomRadioButtons();
@@ -22,53 +30,81 @@ document.addEventListener('DOMContentLoaded', () => {
   })
 
   function generateText() {
-    clear();
+    clear(canvasContext);
 
-    const radioInput = getNodes("[checked]");
-    const fontSizeMinNode = getNodes("#fontSizeMin")[0];
-    const fontSizeMaxNode = getNodes("#fontSizeMax")[0];
+    const radioInput = getNode("[checked]");
+    const fontSizeMinNode = getNode("#fontSizeMin");
+    const fontSizeMaxNode = getNode("#fontSizeMax");
     const fontSizeMin = parseInt(fontSizeMinNode.value || fontSizeMinNode.placeholder);
     const fontSizeMax = parseInt(fontSizeMaxNode.value || fontSizeMaxNode.placeholder);
 
-    const radioColor = radioInput[0].getAttribute('value');
-    init(fontSizeMin, fontSizeMax, radioColor);
+    const radioColor = radioInput.getAttribute('value');
+    init(fontSizeMin, fontSizeMax, radioColor, canvasContext);
   }
 
-  function init(fMin, fMax, color) {
-    forEachInTextarea((unit) => {
-      const textNode = document.createTextNode(unit);
-      const pNode = document.createElement('span');
 
-      pNode.style.fontSize = randomSize(fMin, fMax);
-      pNode.style.color = randomColor(color);
-
-      pNode.appendChild(textNode);
-
-      content.appendChild(pNode);
+  function init(fMin, fMax, colorType, ctx) {
+    let lastXPos;
+    let lastYPos;
+    forEachInTextarea((letter) => {
+      const size = getRandomSize(fMin, fMax);
+      const color = getRandomColor(colorType);
+      const { x, y } = calculatePos(size, lastXPos, lastYPos);
+      lastYPos = y;
+      lastXPos = x;
+      const options = { size, color, x, y };
+      drawLetter(letter, options, ctx);
     })
   }
 
-  function randomColor(pair) {
-    if (pair === "RGB") {
-      colors.red = random();
-      colors.green = random();
-      colors.blue = random();
+  function calculatePos(size, lastXPos, lastYPos = size + 10) {
+    //todo normalize line spacing
+    const lineXSpacing = 20;
+    const lineYSpacing = 40;
+    let x;
+    if (lastXPos === undefined) {
+      lastXPos = 0;
+      x = lastXPos;
     } else {
-      colors.red = colors.green = colors.blue = random();
+      x = lastXPos + lineXSpacing;
     }
-    return `#${colors.red}${colors.green}${colors.blue}`;
+
+    let y = lastYPos;
+    if (x + size > canvasWidth) {
+        y = lastYPos + lineYSpacing;
+        x = 0;
+    }
+    return { x, y };
   }
 
-  function randomSize(min = 20, max = 40) {
-    let r = Math.floor(Math.random() * (max - min) + min);
-    return `${r}px`;
+  function drawLetter(letter, options, ctx) {
+    const { color, size, x, y } = options;
+    ctx.font = `${size}px Barrio`;
+    ctx.fillStyle = color;
+    ctx.fillText(letter, x, y);
+  }
+
+  function getRandomColor(colorType) {
+    let red, green, blue;
+    if (colorType === "RGB") {
+      red = random();
+      green = random();
+      blue = random();
+    } else {
+      red = green = blue = random();
+    }
+    return `#${red}${green}${blue}`;
+  }
+
+  function getRandomSize(min = 20, max = 40) {
+    return Math.floor(Math.random() * (max - min) + min);
   }
 
   function forEachInTextarea(cb) {
     let txt = text.value;
     for (let i = 0; i < txt.length; i++) {
-      const unit = txt[i];
-      cb(unit, i, txt)
+      const letter = txt[i];
+      cb(letter, i, txt)
     }
   }
 
@@ -77,9 +113,10 @@ document.addEventListener('DOMContentLoaded', () => {
     return r.toString(16);
   }
 
-  function clear() {
-    const content = document.querySelector('#content');
-    content.textContent = '';
+  function clear(ctx) {
+    //todo initial canvas color background
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, canvasWidth, canvasHeight);
   }
 
   function initCustomRadioButtons() {
@@ -122,17 +159,13 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function savePng() {
-    const doc = document.querySelector("#content");
-    console.log(123);
-    html2canvas(doc, { backgroundColor: null })
+    html2canvas(canvasNode, { backgroundColor: null })
       .then(canvas => {
         const image = canvas.toDataURL("image/png")
           .replace("image/png", "image/octet-stream");
-        console.log(image);
         const a = document.createElement('a');
         a.href = image;
         const fileName = getUniqName();
-        console.log(fileName);
         a.download = fileName + '.png';
         a.click();
       });

@@ -51,12 +51,8 @@
   margin-top: 10px
 }
 
-#content {
-  width: 100%;
-  max-width: 1200px;
+.canvas-container {
   padding: 15px 10px;
-  word-wrap: break-word;
-  font-family: 'Barrio';
 }
 
 body {
