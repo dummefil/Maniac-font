@@ -2,9 +2,7 @@
   "name": "maniac-font",
   "version": "1.0.0",
   "description": "Text generator with Barrio font",
-  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "browser-sync start --server --files ."
   },
   "repository": {
@@ -14,5 +12,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {}
+  "dependencies": {
+    "browser-sync": "^2.26.14"
+  }
 }

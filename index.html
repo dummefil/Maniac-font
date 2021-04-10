@@ -7,49 +7,36 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Maniac font</title>
   <link rel="stylesheet" href="style.css" type="text/css">
-  <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+  <script src="./libs/html2canvas.min.js"></script>
 </head>
 <body>
 <div class="container">
-  <textarea class="text-area" id="text">Lorem ipsum dolor sit amet</textarea>
   <div id="settings" class="settings-block">
-    <div class="input-group custom-radio-group">
-      <span class="input-group-label">Color:</span>
-      <div class="input-wrapper-column">
-        <label for="RGB" class="input-label">RGB</label>
-        <div class="custom-radio custom-radio-active"
-             id="RGB"
-             value="RGB"
-             name="color"
-             checked></div>
-      </div>
-      <div class="input-wrapper-column">
-        <label for="RGB" class="input-label">GREY</label>
-        <div class="custom-radio" id="GREY" value="GREY" name="color"></div>
+    <div class="input-group">
+      <div class="input-wrappers">
+        <input type="button" class="color-button button active color-rgb" value="RGB">
+        <input type="button" class="color-button button color-grey" value="GREY">
       </div>
     </div>
     <div class="input-group">
-      <span class="input-group-label">Font-size:</span>
       <div class="input-wrappers">
         <div class="input-wrapper">
           <label class="input-label" for="fontSizeMin">From:</label>
-          <input class="font-input" type="number" id="fontSizeMin" placeholder="20">
+          <input class="font-input" type="number" id="fontSizeMin" placeholder="20" min="1">
         </div>
         <div class="input-wrapper">
           <label class="input-label" for="fontSizeMax">To:</label>
-          <input class="font-input" type="number" id="fontSizeMax" placeholder="40">
+          <input class="font-input" type="number" id="fontSizeMax" placeholder="40" min="2">
         </div>
       </div>
     </div>
   </div>
-  <div class="buttons-wrapper">
-    <button id="generate-button" class="custom-button generate-button">Generate</button>
-    <button id="save-button" class="custom-button save-button">Save Image</button>
+  <textarea class="text-area" id="text">This text can be changed :)</textarea>
+  <div class="input-wrappers">
+    <button id="save-button" class="button">Save Image</button>
   </div>
 </div>
-<div class="canvas-container">
-  <canvas></canvas>
-</div>
+<canvas></canvas>
 </body>
 <script src="script.js"></script>
 </html>

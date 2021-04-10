@@ -3,25 +3,42 @@ document.addEventListener('DOMContentLoaded', () => {
   //todo fix bug where font is not load at start
 
   const text = getNode('#text');
-  const generateButton = getNode('#generate-button');
   const canvasNode = getNode('canvas');
   const saveButton = getNode('#save-button');
-  const canvasContext = canvasNode.getContext('2d');
-  const canvasWidth = canvasNode.width;
-  const canvasHeight = canvasNode.height;
 
-  function getNodes(tag) {
-    return document.querySelectorAll(tag);
+  //mb it will fix image bug, dunno
+  let canvasContext;
+  let canvasWidth;
+  let canvasHeight;
+  updateCanvasVars();
+  function updateCanvasVars() {
+    canvasContext = canvasNode.getContext('2d');
+    canvasWidth = canvasNode.width;
+    canvasHeight = canvasNode.height;
   }
 
-  function getNode(tag) {
-    return document.querySelector(tag);
+  function getNodes(selector) {
+    return document.querySelectorAll(selector);
+  }
+
+  function getNode(selector) {
+    return document.querySelector(selector);
   }
 
   initCustomRadioButtons();
   generateText();
 
-  generateButton.onclick = generateText;
+  function generateEventWrapper(className, eventType) {
+    getNodes(className).forEach((node) => {
+      node.addEventListener(eventType, () => {
+        generateText();
+      })
+    })
+  }
+
+  generateEventWrapper('.color-button', 'click');
+  generateEventWrapper('.text-area', 'input');
+  generateEventWrapper('.font-input', 'input');
   saveButton.onclick = savePng;
   window.addEventListener('keydown', (event) => {
     if (event.key === 'Enter') {
@@ -32,13 +49,13 @@ document.addEventListener('DOMContentLoaded', () => {
   function generateText() {
     clear(canvasContext);
 
-    const radioInput = getNode("[checked]");
+    const colorButton = getNode(".color-button.active");
     const fontSizeMinNode = getNode("#fontSizeMin");
     const fontSizeMaxNode = getNode("#fontSizeMax");
     const fontSizeMin = parseInt(fontSizeMinNode.value || fontSizeMinNode.placeholder);
     const fontSizeMax = parseInt(fontSizeMaxNode.value || fontSizeMaxNode.placeholder);
 
-    const radioColor = radioInput.getAttribute('value');
+    const radioColor = colorButton.getAttribute('value');
     init(fontSizeMin, fontSizeMax, radioColor, canvasContext);
   }
 
@@ -71,8 +88,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let y = lastYPos;
     if (x + size > canvasWidth) {
-        y = lastYPos + lineYSpacing;
-        x = 0;
+      y = lastYPos + lineYSpacing;
+      x = 0;
     }
     return { x, y };
   }
@@ -120,37 +137,22 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function initCustomRadioButtons() {
-    const groups = getNodes('.custom-radio-group');
+    const buttons = getNodes('.color-button');
 
-    groups.forEach(group => {
-      const inputs = group.querySelectorAll('.custom-radio')
-      inputs.forEach((radio) => {
-        const handler = eventHandler(inputs)
-        radio.addEventListener('click', handler);
-      })
+    let activeButton = getNode('.color-button.active');
+    buttons.forEach(button => {
+      button.addEventListener('click', () => {
+        activeButton.classList.remove('active');
+        button.classList.add('active');
+        activeButton = button;
+      });
     });
-
-    function eventHandler(inputs) {
-      return function handler(event) {
-        const className = 'custom-radio-active';
-        inputs.forEach(input => {
-          input.classList.remove(className);
-          input.removeAttribute('checked');
-        });
-        const { classList } = event.target;
-        const checked = classList.contains(className);
-        if (!checked) {
-          classList.add(className);
-          event.target.setAttribute('checked', 'checked');
-        }
-      }
-    }
   }
 
   function getUniqName() {
     const date = new Date();
     const string = date.getDate() + "-"
-      + (date.getMonth()+1)  + "-"
+      + (date.getMonth() + 1) + "-"
       + date.getFullYear() + "_"
       + date.getHours() + ":"
       + date.getMinutes() + ":"
@@ -159,6 +161,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function savePng() {
+    updateCanvasVars();
     html2canvas(canvasNode, { backgroundColor: null })
       .then(canvas => {
         const image = canvas.toDataURL("image/png")
