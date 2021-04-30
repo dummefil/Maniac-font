@@ -1,4 +1,4 @@
-# [Link to working example](dummefil.github.io/maniac-font)
+# [Link to working example](https://dummefil.github.io/maniac-font)
 
 # Screenshots
 ### RGB color mode
